@@ -1,7 +1,7 @@
 # Changelog
 All Notable changes to `jobs-usajobs` will be documented in this file
 
-## 0.1.0 - 2016-09-14
+## 0.1.0 - 2016-09-17
 
 ### Added
 - Initial release
