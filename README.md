@@ -25,7 +25,7 @@ Create a Query object and add all the parameters you'd like via the constructor.
 ```php
 // Add parameters to the query via the constructor
 $query = new JobApis\Jobs\Client\Queries\UsajobsQuery([
-    'DeveloperKey' => YOUR_API_ID
+    'AuthorizationKey' => YOUR_API_KEY
 ]);
 ```
 
@@ -33,15 +33,15 @@ Or via the "set" method. All of the parameters documented can be added.
 
 ```php
 // Add parameters via the set() method
-$query->set('Keywords', 'engineering');
+$query->set('Keyword', 'engineering');
 ```
 
 You can even chain them if you'd like.
 
 ```php
 // Add parameters via the set() method
-$query->set('FacetCity', 'Chicago')
-    ->set('FacetState', 'IL');
+$query->set('LocationName', 'Chicago, IL')
+    ->set('JobCategoryCode', '1234');
 ```
  
 Then inject the query object into the provider.
