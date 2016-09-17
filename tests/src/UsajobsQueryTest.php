@@ -25,6 +25,23 @@ class UsajobsQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($keyword, $this->query->getKeyword());
     }
 
+    public function testItCanGetHttpMethodOptions()
+    {
+        $this->assertTrue(array_key_exists('headers', $this->query->getHttpMethodOptions()));
+    }
+
+    public function testItReturnsFalseIfRequiredAttributesMissing()
+    {
+        $this->assertFalse($this->query->isValid());
+    }
+
+    public function testItReturnsTrueIfRequiredAttributesPresent()
+    {
+        $this->query->set('AuthorizationKey', uniqid());
+
+        $this->assertTrue($this->query->isValid());
+    }
+
     public function testItCanAddAttributesToUrl()
     {
         $keyword = uniqid();

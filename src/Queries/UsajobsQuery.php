@@ -377,21 +377,7 @@ class UsajobsQuery extends AbstractQuery
      */
     public function getHttpMethodOptions()
     {
-        return ['headers' => $this->headers()];
-    }
-
-    /**
-     * Gets required headers as array
-     *
-     * @return array
-     */
-    public function headers()
-    {
-        return [
-            'Host' => 'data.usajobs.gov',
-            'Authorization-Key' => $this->get('AuthorizationKey'),
-            'User-Agent' => null, // This prevents Guzzle from setting a user agent, which causes the API call to fail
-        ];
+        return ['headers' => $this->getHeaders()];
     }
 
     /**
@@ -404,6 +390,20 @@ class UsajobsQuery extends AbstractQuery
         $attributes = get_object_vars($this);
         unset($attributes['AuthorizationKey']);
         return $attributes;
+    }
+
+    /**
+     * Gets required headers as array
+     *
+     * @return array
+     */
+    protected function getHeaders()
+    {
+        return [
+            'Host' => 'data.usajobs.gov',
+            'Authorization-Key' => $this->get('AuthorizationKey'),
+            'User-Agent' => null, // This prevents Guzzle from setting a user agent, which causes the API call to fail
+        ];
     }
 
     /**

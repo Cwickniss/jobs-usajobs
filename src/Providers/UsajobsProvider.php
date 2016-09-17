@@ -11,7 +11,7 @@ class UsajobsProvider extends AbstractProvider
      * PositionID
      * DepartmentName
      * ApplyURI
-     * UserArea []
+     * UserArea
      *
      * @param array $payload Raw job payload from the API
      *
@@ -44,23 +44,14 @@ class UsajobsProvider extends AbstractProvider
     /**
      * Job response object default keys that should be set
      *
-     * @return  string
+     * @return  array
      */
     public function getDefaultResponseFields()
     {
         return [
-
+            'MatchedObjectId',
+            'MatchedObjectDescriptor',
         ];
-    }
-
-    /**
-     * Get data format
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return 'json';
     }
 
     /**

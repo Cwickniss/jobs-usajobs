@@ -66,6 +66,11 @@ This will return a [Collection](https://github.com/jobapis/jobs-common/blob/mast
 $ ./vendor/bin/phpunit
 ```
 
+If you want to run a complete integration test, you need to provide your API Key:
+``` bash
+$ AUTHORIZATION_KEY=<YOUR_API_KEY> ./vendor/bin/phpunit
+```
+
 ## Contributing
 
 Please see [CONTRIBUTING](/CONTRIBUTING.md) for details.
