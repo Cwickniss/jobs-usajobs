@@ -120,171 +120,226 @@ class UsajobsQuery extends AbstractQuery
      */
     protected $PositionOfferingTypeCode;
 
-
-
-
-
-
-NOTE: Multiple values are semicolon delimited.
-
-TravelPercentage
-
-Issues a search to find hits for jobs matching the specified travel level.
-Acceptable values for travel percentage parameter are:
-
-Value	Definition
-0	Not Required
-1	Occasional Travel
-2	25% or Greater
-5	50% or Greater
-7	75% or Greater
-https://data.usajobs.gov/api/Search?TravelPercentage=0
-https://data.usajobs.gov/api/Search?TravelPercentage=7
-
-PositionScheduleTypeCode
-
-Issues a search to find hits for jobs matching the specified job schedule. This field is also known as work schedule.
-Acceptable values for Position Schedule Type Code are:
-
-Value	Definition
-1	Full-Time
-2	Part-Time
-3	Shift Work
-4	Intermittent
-5	Job Sharing
-6	Multiple Schedules
-https://data.usajobs.gov/api/Search?PositionSchedule=4
-NOTE: Multiple values are semicolon delimited.
-
-RelocationIndicator
-
-Issues a search to find hits for jobs matching the relocation filter. Acceptable values for this field are: True or False
-
-SecurityClearanceRequired
-
-Issues a search to find hits for jobs matching the specified security clearance.
-Acceptable values for Security Clearance Required parameter are:
-
-Value	Definition
-0	Not Applicable
-1	Confidential
-2	Secret
-3	Top Secret
-4	Top Secret/SCI
-5	Q - Sensitive
-6	Q - Nonsensitive
-7	L - Atomic Energy
-8	Other
-9	Public Trust - Background Investigation
-https://data.usajobs.gov/api/Search?SecurityClearanceRequired=1
-NOTE: Multiple values are semicolon delimited.
-
-SupervisoryStatus
-
-Issues a search to find hits for jobs matching the specified supervisory status.
-
-ExcludeJOAOpenFor30Days
-
-Issues a search that will exclude jobs open longer than 30 days. Acceptable values for this field are: True or False
-
-https://data.usajobs.gov/api/Search?ExcludeJOAOpenFor30Days=False
-
-DatePosted
-
-Issues a search to find hits for jobs that were posted within the number of days specified.
-
-JobGradeCode
-
-Issues a search to find hits for jobs matching the grade code specified. This field is also known as Pay Plan.
-
-NOTE: Multiple values are semicolon delimited.
-
-SortField
-
-Issues a search that will be sorted by the specified field. In this case, the Title.
-
-https://data.usajobs.gov/api/Search?PositionTitle=Electrical&SortField=PositionTitle
-
-SortDirection
-
-Issues a search that will be sorted by the SortField specified, in the direction specified. Asc for ascending, or desc for descending.
-
-https://data.usajobs.gov/api/Search?PositionTitle=Electrical&SortField=PositionTitle&SortDirection=Asc
-
-Page
-
-Issues a search to pull the paged results specified.
-
-ResultsPerPage
-
-Issues a search and returns the page size specified. In this example, 25 jobs will be return for the first page.
-Acceptable values for this field are numbers, up to 500.
-
-https://data.usajobs.gov/api/Search?ResultsPerPage=50
-
-WhoMayApply
-
-Issues a search to find hits based on the desired candidate designation. In this case, public will find jobs that U.S. citizens can apply for. Acceptable values for this parameter are: "All","Public", or "Status".
-
-https://data.usajobs.gov/api/Search?WhoMayApply=public
-
-NOTE: All and Status require specific authorization.
-
-Radius
-
-Issues a search when used along with LocationName, will expand the locations, based on the radius specified.
-
-https://data.usajobs.gov/api/Search?LocationName=Norfolk%20Virginia&Radius=75
-
-Fields
-
-Issues a search that will return the minimum fields or maximum number of fields in the job. Min returns only the job summary. Acceptable values for this field are: "Min" and "Full"
-
-https://data.usajobs.gov/api/Search?TravelPercentage=7&Fields=full
-https://data.usajobs.gov/api/Search?SecurityClearanceRequired=1&Fields=full
-
-SalaryBucket
-
-Issues a search that will find hits for salaries matching the grouping specified. Buckets are assigned based on salary ranges. For example 25 = $25,000-$49,000.
-
-NOTE: Multiple values are semicolon delimited.
-
-GradeBucket
-
-Issues a search that will find hits for grades that match the grouping specified.
-
-SES
-
-Issues a search that will find hits for jobs matching the Senior executive category. Acceptable values are: True or False – Default is False.
-
-SES stands for Senior Executive Service which is comprised of the men and women charged with leading the continuing transformation of government. When specifying "True" for SES, only those jobs which are considered an SES position will be returned.
-
-For more information on SES, go to:
-http://www.opm.gov/policy-data-oversight/senior-executive-service/.
-
-To find all SES positions, use:
-https://data.usajobs.gov/api/Search?SES=True
-
-Student
-
-Issues a search that will find hits for jobs matching the Student category. Acceptable values are: True or False – Default is False. When the Student query parameter is used and the value is set to True, only job announcements targeted for students will be included.
-
-The value of "False" (or not providing a query parameter of Student) does not exclude student jobs from the search. "False" tells search to not return student jobs exclusively.
-
-To find all Student positions, use:
-https://data.usajobs.gov/api/Search?Student=True
-
-Internship
-
-Issues a search that will find hits for jobs matching the Internship category. Acceptable values are: True or False
-
-https://data.usajobs.gov/api/Search?Internship=True
-
-RecentGrad
-
-Issues a search that will find hits for jobs matching the RecentGrad category. Acceptable values are: True or False
-
-https://data.usajobs.gov/api/Search?RecentGrad=True
+    /**
+     * TravelPercentage
+     *
+     * Issues a search to find hits for jobs matching the specified travel level.
+     * Acceptable values for travel percentage parameter are:
+     * Value	Definition
+     * 0	    Not Required
+     * 1	    Occasional Travel
+     * 2	    25% or Greater
+     * 5	    50% or Greater
+     * 7	    75% or Greater
+     *
+     * @var string
+     */
+    protected $TravelPercentage;
+
+    /**
+     * PositionScheduleTypeCode
+     *
+     * Issues a search to find hits for jobs matching the specified job schedule. This field is also known as work schedule.
+     * Acceptable values for Position Schedule Type Code are:
+     * Value	Definition
+     * 1	    Full-Time
+     * 2	    Part-Time
+     * 3    	Shift Work
+     * 4    	Intermittent
+     * 5    	Job Sharing
+     * 6    	Multiple Schedules
+     * NOTE: Multiple values are semicolon delimited.
+     *
+     * @var string
+     */
+    protected $PositionScheduleTypeCode;
+
+    /**
+     * RelocationIndicator
+     *
+     * Issues a search to find hits for jobs matching the relocation filter. Acceptable values for this field are: True or False
+     *
+     * @var string
+     */
+    protected $RelocationIndicator;
+
+    /**
+     * SecurityClearanceRequired
+     *
+     * Issues a search to find hits for jobs matching the specified security clearance.
+     * Acceptable values for Security Clearance Required parameter are:
+     * Value	Definition
+     * 0	    Not Applicable
+     * 1	    Confidential
+     * 2	    Secret
+     * 3	    Top Secret
+     * 4	    Top Secret/SCI
+     * 5    	Q - Sensitive
+     * 6	    Q - Nonsensitive
+     * 7	    L - Atomic Energy
+     * 8	    Other
+     * 9	    Public Trust - Background Investigation
+     * NOTE: Multiple values are semicolon delimited.
+     *
+     * @var string
+     */
+    protected $SecurityClearanceRequired;
+
+    /**
+     * SupervisoryStatus
+     *
+     * Issues a search to find hits for jobs matching the specified supervisory status.
+     *
+     * @var string
+     */
+    protected $SupervisoryStatus;
+
+    /**
+     * ExcludeJOAOpenFor30Days
+     *
+     * Issues a search that will exclude jobs open longer than 30 days. Acceptable values for this field are: True or False
+     *
+     * @var string
+     */
+    protected $ExcludeJOAOpenFor30Days;
+
+    /**
+     * DatePosted
+     *
+     * Issues a search to find hits for jobs that were posted within the number of days specified.
+     *
+     * @var string
+     */
+    protected $DatePosted;
+
+    /**
+     * JobGradeCode
+     *
+     * Issues a search to find hits for jobs matching the grade code specified. This field is also known as Pay Plan.
+     * NOTE: Multiple values are semicolon delimited.
+     *
+     * @var string
+     */
+    protected $JobGradeCode;
+
+    /**
+     * SortField
+     *
+     * Issues a search that will be sorted by the specified field.
+     *
+     * @var string
+     */
+    protected $SortField;
+
+    /**
+     * SortDirection
+     *
+     * Issues a search that will be sorted by the SortField specified, in the direction specified. Asc for ascending, or desc for descending.
+     *
+     * @var string
+     */
+    protected $SortDirection;
+
+    /**
+     * Page
+     *
+     * Issues a search to pull the paged results specified.
+     *
+     * @var string
+     */
+    protected $Page;
+
+    /**
+     * ResultsPerPage
+     *
+     * Issues a search and returns the page size specified. In this example, 25 jobs will be return for the first page.
+     * Acceptable values for this field are numbers, up to 500.
+     *
+     * @var string
+     */
+    protected $ResultsPerPage;
+
+    /**
+     * WhoMayApply
+     *
+     * Issues a search to find hits based on the desired candidate designation. In this case, public will find jobs that U.S. citizens can apply for. Acceptable values for this parameter are: "All","Public", or "Status".
+     *
+     * @var string
+     */
+    protected $WhoMayApply;
+
+    /**
+     * Radius
+     *
+     * Issues a search when used along with LocationName, will expand the locations, based on the radius specified.
+     *
+     * @var string
+     */
+    protected $Radius;
+
+    /**
+     * Fields
+     *
+     * Issues a search that will return the minimum fields or maximum number of fields in the job. Min returns only the job summary. Acceptable values for this field are: "Min" and "Full"
+     *
+     * @var string
+     */
+    protected $Fields;
+
+    /**
+     * SalaryBucket
+     *
+     * Issues a search that will find hits for salaries matching the grouping specified. Buckets are assigned based on salary ranges. For example 25 = $25,000-$49,000.
+     * NOTE: Multiple values are semicolon delimited.
+     *
+     * @var string
+     */
+    protected $SalaryBucket;
+
+    /**
+     * GradeBucket
+     *
+     * Issues a search that will find hits for grades that match the grouping specified.
+     *
+     * @var string
+     */
+    protected $GradeBucket;
+
+    /**
+     * SES
+     *
+     * Issues a search that will find hits for jobs matching the Senior executive category. Acceptable values are: True or False – Default is False.
+     *
+     * @var string
+     */
+    protected $SES;
+
+    /**
+     * Student
+     *
+     * Issues a search that will find hits for jobs matching the Student category. Acceptable values are: True or False – Default is False. When the Student query parameter is used and the value is set to True, only job announcements targeted for students will be included.
+     *
+     * @var string
+     */
+    protected $Student;
+
+    /**
+     * Internship
+     *
+     * Issues a search that will find hits for jobs matching the Internship category. Acceptable values are: True or False
+     *
+     * @var string
+     */
+    protected $Internship;
+
+    /**
+     * RecentGrad
+     *
+     * Issues a search that will find hits for jobs matching the RecentGrad category. Acceptable values are: True or False
+     *
+     * @var string
+     */
+    protected $RecentGrad;
 
     /**
      * Get baseUrl
@@ -293,7 +348,7 @@ https://data.usajobs.gov/api/Search?RecentGrad=True
      */
     public function getBaseUrl()
     {
-        return 'http://api.careerbuilder.com/v1/jobsearch';
+        return 'https://data.usajobs.gov/api/search';
     }
 
     /**
@@ -303,32 +358,19 @@ https://data.usajobs.gov/api/Search?RecentGrad=True
      */
     public function getKeyword()
     {
-        return $this->Keywords;
+        return $this->Keyword;
     }
 
     /**
-     * Default parameters
+     * Sets required headers as array
+        Host: data.usajobs.gov
+        User-Agent: your@email.address
+        Authorization-Key: YourAPIKey
      *
-     * @var array
-     */
-    protected function defaultAttributes()
+     * @param array $headers
+    public function setHeaders($headers = [])
     {
-        return [
-            'EnableCompanyCollapse' => 'true',
-            'HostSite' => 'US',
-            'UseFacets' => 'true',
-        ];
+        $this->headers = $headers;
     }
-
-    /**
-     * Required parameters
-     *
-     * @return array
      */
-    protected function requiredAttributes()
-    {
-        return [
-            'DeveloperKey',
-        ];
-    }
 }
