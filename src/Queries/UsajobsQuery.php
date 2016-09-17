@@ -3,6 +3,15 @@
 class UsajobsQuery extends AbstractQuery
 {
     /**
+     * AuthorizationKey
+     *
+     * Your USAJOBS API key
+     *
+     * @var string
+     */
+    protected $AuthorizationKey;
+
+    /**
      * Keyword
      *
      * Issues search to find hits based on a keyword. Optional. Keyword will search for all of the words specified (or synonyms of the word) throughout the job announcement.
@@ -362,15 +371,50 @@ class UsajobsQuery extends AbstractQuery
     }
 
     /**
-     * Sets required headers as array
-        Host: data.usajobs.gov
-        User-Agent: your@email.address
-        Authorization-Key: YourAPIKey
+     * Get http method options based on current client. Good for adding POST parameters.
      *
-     * @param array $headers
-    public function setHeaders($headers = [])
-    {
-        $this->headers = $headers;
-    }
+     * @return array
      */
+    public function getHttpMethodOptions()
+    {
+        return ['headers' => $this->headers()];
+    }
+
+    /**
+     * Gets required headers as array
+     *
+     * @return array
+     */
+    public function headers()
+    {
+        return [
+            'Host' => 'data.usajobs.gov',
+            'Authorization-Key' => $this->get('AuthorizationKey'),
+            'User-Agent' => null, // This prevents Guzzle from setting a user agent, which causes the API call to fail
+        ];
+    }
+
+    /**
+     * Gets the attributes to use for this API's query
+     *
+     * @var array
+     */
+    protected function getQueryAttributes()
+    {
+        $attributes = get_object_vars($this);
+        unset($attributes['AuthorizationKey']);
+        return $attributes;
+    }
+
+    /**
+     * Required attributes for the query
+     *
+     * @var array
+     */
+    protected function requiredAttributes()
+    {
+        return [
+            'AuthorizationKey',
+        ];
+    }
 }
