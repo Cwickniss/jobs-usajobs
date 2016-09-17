@@ -27,6 +27,7 @@ class UsajobsProviderTest extends \PHPUnit_Framework_TestCase
         $client = new UsajobsProvider($query);
 
         $results = $client->getJobs();
+        var_dump($results); exit;
 
         $this->assertInstanceOf('JobApis\Jobs\Client\Collection', $results);
 
