@@ -40,6 +40,10 @@ class UsajobsProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload['MatchedObjectId'], $results->sourceId);
         $this->assertEquals($payload['MatchedObjectDescriptor']['PositionTitle'], $results->title);
         $this->assertEquals($payload['MatchedObjectDescriptor']['PositionURI'], $results->url);
+        $this->assertEquals(\DateTime::class, get_class($results->datePosted));
+        $this->assertEquals(\DateTime::class, get_class($results->validThrough));
+        $this->assertEquals(\DateTime::class, get_class($results->startDate));
+        $this->assertEquals(\DateTime::class, get_class($results->endDate));
     }
 
     /**

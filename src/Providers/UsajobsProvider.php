@@ -28,14 +28,11 @@ class UsajobsProvider extends AbstractProvider
             'name' => $payload['PositionTitle'],
             'url' => $payload['PositionURI'],
             'qualifications' => $payload['QualificationSummary'],
-            'datePosted' => $payload['PublicationStartDate'],
-            'validThrough' => $payload['ApplicationCloseDate'],
-            'startDate' => $payload['PositionStartDate'],
-            'endDate' => $payload['PositionEndDate'],
         ]);
 
         $job->setCompany($payload['OrganizationName']);
 
+        $job = $this->setDates($payload, $job);
         $job = $this->setNestedProperties($payload, $job);
         $job = $this->setSalary($payload['PositionRemuneration'], $job);
         return $this->setLocation($payload['PositionLocation'], $job);
@@ -62,6 +59,31 @@ class UsajobsProvider extends AbstractProvider
     public function getListingsPath()
     {
         return 'SearchResult.SearchResultItems';
+    }
+
+    /**
+     * Sets nested properties
+     *
+     * @param $payload array
+     * @param $job \JobApis\Jobs\Client\Job
+     *
+     * @return \JobApis\Jobs\Client\Job
+     */
+    protected function setDates($payload, $job)
+    {
+        $dateFields = [
+            'PublicationStartDate' => 'datePosted',
+            'ApplicationCloseDate' => 'validThrough',
+            'PositionStartDate' => 'startDate',
+            'PositionEndDate' => 'endDate',
+        ];
+        foreach ($dateFields as $key => $field) {
+            if (strtotime($payload[$key]) !== false) {
+                $job->{'set'.ucfirst($field)}(new \DateTime($payload[$key]));
+            }
+        }
+
+        return $job;
     }
 
     /**
